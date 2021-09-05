@@ -1,0 +1,122 @@
+POST http://localhost:3000/register/
+Content-Type: application/json
+
+{
+    "username": "anudeep",
+    "password": "anudeep@2021",
+    "gender": "male",
+    "age": 23,
+    "category": "admin"
+}
+###
+
+POST http://localhost:3000/register/
+Content-Type: application/json
+
+{
+    "username": "rahul",
+    "password": "rahul@2021",
+    "gender": "male",
+    "age": 28,
+    "category": "user"
+}
+###
+
+POST http://localhost:3000/login/
+Content-Type: application/json
+
+{
+    "username": "anudeep",
+    "password": "anudeep@2021",
+    "category": "admin"
+}
+###
+
+POST http://localhost:3000/login/
+Content-Type: application/json
+
+{
+    "username": "rahul",
+    "password": "rahul@2021",
+    "category": "user"
+}
+###
+
+GET http://localhost:3000/cars/?brand=TATA&name=nexon
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+###
+
+GET http://localhost:3000/cars/?brand=hyundai&color=black
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+###
+
+GET http://localhost:3000/cars/?name=baleno&color=silver
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+###
+
+GET http://localhost:3000/cars/?brand=renault
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+###
+
+GET http://localhost:3000/cars/?name=ciaz
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+###
+
+GET http://localhost:3000/cars/?color=white
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+###
+
+GET http://localhost:3000/cars/?status=available
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+###
+
+POST http://localhost:3000/bookings/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+Content-Type: application/json
+
+{
+    "car_id": 101,
+    "username": "rahul",
+    "address": "madhapur",
+    "start_time": "2021-09-05 09:30",
+    "end_time": "2021-09-07 10:30",
+    "amount": 5000
+}
+###
+
+POST http://localhost:3000/feedback/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhaHVsIiwiY2F0ZWdvcnkiOiJ1c2VyIiwiaWF0IjoxNjMwODQ0Njc4fQ.yKQpgdubdAIDrwgwSqK4E2856L8E3aKzEZjHYNUunEw
+Content-Type: application/json
+
+{
+    "username": "rahul",
+    "description": "excellent service",
+    "rating": 4.5
+}
+###
+
+POST http://localhost:3000/cars/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudWRlZXAiLCJjYXRlZ29yeSI6ImFkbWluIiwiaWF0IjoxNjMwODQ1Mjk0fQ.M4myT6JZtAdsWih4tlL-TT85pZ4SY0Ki4DOkMkCH9jY
+Content-Type: application/json
+
+{
+    "car_id": 111,
+    "brand": "maruti",
+    "name": "brezza",
+    "color": "red",
+    "status": "avaliable"
+}
+###
+
+PUT http://localhost:3000/cars/111
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudWRlZXAiLCJjYXRlZ29yeSI6ImFkbWluIiwiaWF0IjoxNjMwODQ1Mjk0fQ.M4myT6JZtAdsWih4tlL-TT85pZ4SY0Ki4DOkMkCH9jY
+Content-Type: application/json
+
+{
+    "name": "ertiga"
+}
+###
+
+DELETE http://localhost:3000/cars/111
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFudWRlZXAiLCJjYXRlZ29yeSI6ImFkbWluIiwiaWF0IjoxNjMwODQ1Mjk0fQ.M4myT6JZtAdsWih4tlL-TT85pZ4SY0Ki4DOkMkCH9jY
+###
