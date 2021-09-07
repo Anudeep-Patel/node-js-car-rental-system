@@ -30,7 +30,7 @@ const initializeDBAndServer = async () => {
 
 initializeDBAndServer();
 
-//Token Verification API
+//Token Verification
 const authenticateToken = (request, response, next) => {
   let jwtToken;
   const authorizationHeader = request.headers["authorization"];
@@ -46,7 +46,6 @@ const authenticateToken = (request, response, next) => {
         response.status(401);
         response.send("Invalid JWT Token");
       } else {
-        request.username = payload.username;
         request.category = payload.category;
         next();
       }
@@ -54,7 +53,18 @@ const authenticateToken = (request, response, next) => {
   }
 };
 
-// Validate Password
+//Admin Validation
+const isValidAdmin = (request, response, next) => {
+  let { category } = request;
+  if (category === "admin") {
+    next();
+  } else {
+    response.status(401);
+    response.send("Invalid User");
+  }
+};
+
+//Validate Password
 const validatePassword = (password) => {
   return password.length > 6;
 };
@@ -92,7 +102,7 @@ app.post("/login/", async (request, response) => {
   } else {
     const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
     if (isPasswordMatched === true) {
-      const payload = { username: username, category: category };
+      const payload = { category: category };
       const jwtToken = jwt.sign(payload, "Mustang");
       response.send({ jwtToken });
     } else {
@@ -206,27 +216,28 @@ app.post("/feedback/", authenticateToken, async (request, response) => {
 });
 
 //Create Car API
-app.post("/cars/", authenticateToken, async (request, response) => {
-  let { category } = request;
-  const { car_id, brand, name, color, status } = request.body;
-  if (category === "admin") {
+app.post(
+  "/cars/",
+  authenticateToken,
+  isValidAdmin,
+  async (request, response) => {
+    const { car_id, brand, name, color, status } = request.body;
     const createCarQuery = `INSERT INTO cars(car_id, brand, name, color, status)
       VALUES(${car_id}, '${brand}', '${name}', '${color}', '${status}');`;
     await database.run(createCarQuery);
     response.send("Car details added successfully");
-  } else {
-    response.status(401);
-    response.send("Invalid User");
   }
-});
+);
 
 //Update Car API
-app.put("/cars/:carId", authenticateToken, async (request, response) => {
-  const { carId } = request.params;
-  let updateColumn;
-  let updateCarQuery;
-  let { category } = request;
-  if (category === "admin") {
+app.put(
+  "/cars/:carId",
+  authenticateToken,
+  isValidAdmin,
+  async (request, response) => {
+    const { carId } = request.params;
+    let updateColumn;
+    let updateCarQuery;
     if ("brand" in request.body) {
       updateColumn = "Brand";
       const { brand } = request.body;
@@ -250,24 +261,20 @@ app.put("/cars/:carId", authenticateToken, async (request, response) => {
     }
     await database.run(updateCarQuery);
     response.send(`${updateColumn} Updated`);
-  } else {
-    response.status(400);
-    response.send("Invalid User");
   }
-});
+);
 
 //Delete Car API
-app.delete("/cars/:carId", authenticateToken, async (request, response) => {
-  const { carId } = request.params;
-  let { category } = request;
-  if (category === "admin") {
+app.delete(
+  "/cars/:carId",
+  authenticateToken,
+  isValidAdmin,
+  async (request, response) => {
+    const { carId } = request.params;
     const deleteCarQuery = `DELETE FROM cars WHERE car_id = ${carId};`;
     await database.run(deleteCarQuery);
     response.send("Car Deleted");
-  } else {
-    response.status(400);
-    response.send("Invalid User");
   }
-});
+);
 
 module.exports = app;
